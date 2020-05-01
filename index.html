@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Book</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css" media="media and screen(max-width = 768px)">
+</head>
+<body>
+    <main>
+        <h1>Address Book</h1>
+        <table id="contacts-table">
+            <tr id="contacts-head">
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+
+<form action="" id="contacts-form">
+    <div class="itemtext">
+        <label for="">First name:</label>
+        <div class="field">
+            <input type="text" name="first_name">
+        </div>
+    </div>
+    <div class="itemtext">
+        <label for="">Last name:</label>
+        <div class="field">
+            <input type="text" name="last_name">
+        </div>
+    </div>
+    <div class="itemtext">
+        <label for="">Email:</label>
+        <div class="field">
+            <input type="text" name="email">
+        </div>
+    </div>
+
+    <div class="button-wrapper">
+        <div class="item button">
+            <div class="field">
+                <input type="button" value="Discard" id="contacts-op-discard">
+            </div>
+        </div>
+
+        <div class="item button button-default">
+            <div class="field">
+                <input type="button" value="Save" id="contacts-op-save">
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="id_entry" value="0">
+</form>
+
+    </main>
+</body>
+<script src="style.js"></script>
+</html>
