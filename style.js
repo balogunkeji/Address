@@ -1,149 +1,141 @@
-var Contacts = {
-    index : 1,
+// contact class
+class Contact {
+     constructor(fname,lname,pnumber,email,family){
+     this.fname = fname;
+     this.lname = lname;
+     this.pnumber = pnumber;
+     this.email = email;
+     this.family = family;
+     }
+}
 
-    init: function (entry){},
-    storeAdd : function (entry){},
-    storeEdit : function (entry){},
-    storeRemove : function(entry) {},
+//UI class
 
-    tableAdd : function (entry){},
-    tableEdit : function (entry){},
-    tableRemove : function(entry) {},
+class UI {
+    static displayContacts() {
+        const StoredContacts = [
+            {
+                fname : 'Tosin',
+                lname : 'Balogun',
+                pnumber : '07039518150',
+                email : 'tomitoyo.93@gmail.com',
+                family : 'Balogun'
+            },
 
-};
-
-Contacts.init();
-
-
-//initializing the application
-
-var Contacts = {
-    index : window.localStorage.getItem('contacts : index'),
-    table: document.getElementById('contacts-table'),
-    form : document.getElementById('contacts-form'),
-    button: document.getElementById('button-save'),
-    buttonDiscard: document.getElementById('button-discard'),
-
-    init : function() {
-        if(!Contacts.index){
-            window.localStorage.setItem('Contacts : index', JSON.stringify('Tosin'));
-        }
-    },
-}; 
-
-//setting up the form
-
-var Contacts = {
-    init: function(){
-        Contacts.form.reset();
-        
-        Contacts.button.addEventListener('click', function subBut(){
-            Contacts.form.reset();
-            Contacts.form.id_entry.value = 0;
-        }, true);
-
-        Contacts.form.addEventListener('submit', function(event){
-            var entry = {
-                id : parseInt(this.id_entry.value),
-                first_name: this.first_name.value,
-                last_name: this.last_name.value,
-                email: this.email.value,
-            };
-
-            if (entry.id == 0){
-                Contacts.storeAdd(entry);
-                Contacts.tableAdd(entry);
+            {
+                fname : 'Tosin',
+                lname : 'Balogun',
+                pnumber : '07039518150',
+                email : 'tomitoyo.93@gmail.com',
+                family : 'Balogun'
             }
-                
-            else{
-                Contacts.storeEdit(entry);
-                Contacts.tableEdit(entry);
-            }
+        ];
 
-            this.reset();
-            this.id_entry.value=0;
-            event.preventDefaults();
-        },true);
+        const contacts = StoredContacts;
 
-    },
-};
+        contacts.forEach((contact) => UI.addContactToList(contact));
+    }
 
-//populating the table
 
-var Contacts = {
-    init : function (){
-        if (window.localStorage.length == 1){
-            var contacts_list = [], i, key;
-            for(i=0; i< windows.localStorage.length; i++ ){
-                key = window.localStorage.key(i);
-                if(/Contacts: \d+/.test(key)){
-                    contacts_list.push(JSON.parse(window.localStorage.getItem(key)));
-                }
-            }
 
-            if(contacts_list.length){
-                contacts_list.sort(function(a,b){
-                    return a.id < b.id ? -1 : (a.id> b.id ? 1:0);
-                }) . forEach(Contacts.tableAdd);
-            }
-        }
-    },
-};
+    static addContactToList(contact) {
 
-//adding new entries
+        const List = document.querySelector('#contact-list');
 
-var Contacts = {
-    storeAdd : function(entry) {
-        entry.id = Contacts.index;
+        const row = document.createElement('tr');
 
-        window.localStorage.setItem('Contacts: ' + entry.id, JSON.stringify(entry));
-        window.localStorage.setItem('Contacts: index', ++Contacts.index);
-        console.log(storeAdd);
-    },
+        row.innerHTML = `
+        <td>${contact.fname}</td>
+        <td>${contact.lname}</td>
+        <td>${contact.pnumber}</td>
+        <td>${contact.email}</td>
+        <td>${contact.family}</td>
+        <td><a href="#" class="btn btn-danger btn-small delete">X</a></td> `;
 
-    tableAdd: function(entry){
-        var tr = document.createElement('tr'), td ,key;
-        for(key in entry){
-            if(entry.hasOwnProperty(MediaKeySession)){
-                td = document.createElement('td');
-                td.appendChild(document.createTextNode(entry[key]));
-                tr.appendChild('td');
-                console.log(tr);
-            }
-            console.log(tableAdd);
+        List.appendChild(row);
+
+    }
+
+    static deleteList(el) {
+        if (el.classList.contains('delete')) {
+            el.parentElement.parentElement.remove();
         }
 
-        td = document.createElement('td');
-        td.innerHTML = '<a data-op = "edit" data-id = "'+ entry.id +'">Edit</a>' | '<a data-op = "remove" data-id = "'+ entry.id +'">Remove</a>';
-        tr.append('td');
-        tr.setAttribute("id", "entry-" + entry.id);
-        Contacts.table.appendChild('tr');
-    },
-};
+        console.log(el);
+    }
 
-//updating and deleting entries
+    static clearFields () {
+     document.querySelector('#firstname').value = '';
+     document.querySelector('#lastname').value ='';
+     document.querySelector('#number').value = '';
+     document.querySelector('#email').value = '';
+     document.querySelector('#family').value = '';
+    }
 
-var Contacts = {
-    init: function() {
-        Contacts.table.addEventListener('click', function(entry){
-            var op = event.target.getAttribute("data-op");
-            if(/edit|remove/.test(op)){
-                var entry = JSON.parse(window.localStorage.getItem("Contacts:"+ event.target.getAttribute("data-id")));
-                if(op == "edit"){
-                    Contacts.form.first_name.value = entry.first_name;
-                    Contacts.form.last_name.value = entry.last_name;
-                    Contacts.form.email.value = entry.email;
-                }
 
-                else if(op == "remove"){
-                    if (confirm("Are you sure you want to delete this entry")) {
-                        Contacts.storeRemove(entry);
-                        Contacts.tableRemove(entry);
-                    }
-                }
-                event.preventDefault();
-            }
+    static showAlert(message, className){
+        const div = document.createElement('div');
+        div.className = `alert alert-${className}`;
+        div.appendChild(document.createTextNode(message));
+        const container = document.querySelector('.container');
+        const form = document.querySelector('#list-form');
+        container.insertBefore(div,form);
 
-        }, true);
-    },
-};
+
+        setTimeout(() => document.querySelector('.alert').remove(),3000);
+    }
+    
+}
+
+
+// Stored class
+
+//Event: display Books
+
+document.addEventListener('DOMContentLoaded', UI.displayContacts);
+
+
+//event: Add Lists
+
+document.querySelector('#list-form').addEventListener('submit', (e) => {
+
+    e.preventDefault();
+    //Get form Values
+
+    const fname = document.querySelector('#firstname').value;
+    const lname= document.querySelector('#lastname').value;
+    const pnumber = document.querySelector('#number').value;
+    const email = document.querySelector('#email').value;
+    const family = document.querySelector('#family').value;
+
+
+    //validate
+
+    if(fname === '' || lname === '' || pnumber === '' || email === '' || family === ''){
+        UI.showAlert('Please fill in all fields', 'danger');
+    } else{
+        UI.showAlert('Saved', 'success');
+    }
+    
+
+    // instantiate list
+
+    const contact = new Contact(fname,lname, pnumber, email, family );
+
+    console.log(contact);
+
+    // Add book to UI
+
+    UI.addContactToList(contact);
+
+    //clearfields
+    UI.clearFields();
+});
+
+
+//Events: Removelist
+
+document.querySelector('#contact-list').addEventListener('click', (e) => {
+    UI.deleteList(e.target);
+    console.log(e);
+});

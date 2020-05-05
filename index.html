@@ -5,58 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Address Book</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mobile.css" media="media and screen(max-width = 768px)">
+    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
 </head>
 <body>
-    <main>
-        <h1>Address Book</h1>
-        <table id="contacts-table">
-            <tr id="contacts-head">
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Email</th>
-                <th>Actions</th>
-            </tr>
+
+    <div class="container mt-4">
+        <h1 class="display4">
+            <i class="fas fa-book-open text-secondary"></i>
+            <span>My</span>
+            <span class="text-primary">Address</span>
+            <span>Book</span>
+        </h1>
+
+        <form id="list-form">
+            <div class="form-group">
+                <label for="tittle">First Name:</label>
+                <input type="text" id="firstname" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="tittle">Last Name:</label>
+                <input type="text" id="lastname" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="tittle">Email:</label>
+                <input type="email" id="email" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="tittle">Phone-Number</label>
+                <input type="text" id="number" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="tittle">Family:</label>
+                <input type="text" id="family" class="form-control">
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" id="button" class="btn btn-info btn-block " value="Add Contact">
+            </div>
+
+        </form>
+
+        <table class="table-stripped table mt-5 ">
+            <thead>
+                <tr class="table-dark">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone_Number</th>
+                    <th>Email</th>
+                    <th>Family</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="contact-list"></tbody>
         </table>
-
-<form action="" id="contacts-form">
-    <div class="itemtext">
-        <label for="">First name:</label>
-        <div class="field">
-            <input type="text" name="first_name">
-        </div>
     </div>
-    <div class="itemtext">
-        <label for="">Last name:</label>
-        <div class="field">
-            <input type="text" name="last_name">
-        </div>
-    </div>
-    <div class="itemtext">
-        <label for="">Email:</label>
-        <div class="field">
-            <input type="text" name="email">
-        </div>
-    </div>
-
-    <div class="button-wrapper">
-        <div class="item button">
-            <div class="field">
-                <input type="button" value="Discard" id="contacts-op-discard">
-            </div>
-        </div>
-
-        <div class="item button button-default">
-            <div class="field">
-                <input type="button" value="Save" id="contacts-op-save">
-            </div>
-        </div>
-    </div>
-    <input type="hidden" name="id_entry" value="0">
-</form>
-
-    </main>
+    
 </body>
 <script src="style.js"></script>
 </html>
