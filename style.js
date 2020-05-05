@@ -13,9 +13,8 @@ class Contact {
 
 class UI {
     static displayContacts() {
-        const StoredContacts = Store.getContacts();
+        const contacts = Store.getContacts();
 
-        const contacts = StoredContacts;
 
         contacts.forEach((contact) => UI.addContactToList(contact));
     }
@@ -80,7 +79,7 @@ class Store {
     if(localStorage.getItem('contact') === null){
         contact = [];
     }else {
-        contact = JSON.parse(localStorage.getItem('contact'))
+        contact = JSON.parse(localStorage.getItem('contact'));
     }
 
     return contact;
@@ -91,7 +90,7 @@ class Store {
 
         const contacts = Store.getContacts();
         contacts.push(contact);
-        localStorage.setItem('contacts', JSON.stringify(books));
+        localStorage.setItem('contacts', JSON.stringify(contacts));
 
 
 }
