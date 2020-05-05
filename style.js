@@ -13,23 +13,7 @@ class Contact {
 
 class UI {
     static displayContacts() {
-        const StoredContacts = [
-            {
-                fname : 'Tosin',
-                lname : 'Balogun',
-                pnumber : '07039518150',
-                email : 'tomitoyo.93@gmail.com',
-                family : 'Balogun'
-            },
-
-            {
-                fname : 'Tosin',
-                lname : 'Balogun',
-                pnumber : '07039518150',
-                email : 'tomitoyo.93@gmail.com',
-                family : 'Balogun'
-            }
-        ];
+        const StoredContacts = Store.getContacts();
 
         const contacts = StoredContacts;
 
@@ -88,7 +72,47 @@ class UI {
 }
 
 
-// Stored class
+// Stored class : local storage
+
+class Store {
+   static getContacts() {
+    let contact;
+    if(localStorage.getItem('contact') === null){
+        contact = [];
+    }else {
+        contact = JSON.parse(localStorage.getItem('contact'))
+    }
+
+    return contact;
+
+    }
+
+    static addContact(contact){
+
+        const contacts = Store.getContacts();
+        contacts.push(contact);
+        localStorage.setItem('contacts', JSON.stringify(books));
+
+
+}
+
+
+static removeContact(fname){
+    const contacts = Store.getContacts() ;
+
+    contacts.forEach((contact, index) => {
+        if(contact.fname === fname){
+            contacts.splice(index,1);
+        }
+    });
+
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+
+}
+
+}
+
+
 
 //Event: display Books
 
@@ -114,7 +138,7 @@ document.querySelector('#list-form').addEventListener('submit', (e) => {
     if(fname === '' || lname === '' || pnumber === '' || email === '' || family === ''){
         UI.showAlert('Please fill in all fields', 'danger');
     } else{
-        UI.showAlert('Saved', 'success');
+        UI.showAlert('Contact Added', 'success');
     }
     
 
@@ -128,6 +152,10 @@ document.querySelector('#list-form').addEventListener('submit', (e) => {
 
     UI.addContactToList(contact);
 
+   // add book to store
+
+   Store.addContact(contact);
+
     //clearfields
     UI.clearFields();
 });
@@ -138,4 +166,11 @@ document.querySelector('#list-form').addEventListener('submit', (e) => {
 document.querySelector('#contact-list').addEventListener('click', (e) => {
     UI.deleteList(e.target);
     console.log(e);
+
+Store.removeContact(e.target.parentElement.previousElementSibling.textContent);
+
+
+    UI.showAlert('Contact Removed', 'success');
+
+
 });
