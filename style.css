@@ -1,4 +1,4 @@
 table{
-    overflow-x: auto;
+    overflow: auto;
     scroll-behavior: smooth;
 }
