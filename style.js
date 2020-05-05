@@ -13,10 +13,10 @@ class Contact {
 
 class UI {
     static displayContacts() {
-        const contacts = Store.getContacts();
+        const contact = Store.getContacts();
 
 
-        contacts.forEach((contact) => UI.addContactToList(contact));
+        contact.forEach((contact) => UI.addContactToList(contact));
     }
 
 
@@ -75,14 +75,14 @@ class UI {
 
 class Store {
    static getContacts() {
-    let contact;
+    let contacts;
     if(localStorage.getItem('contact') === null){
-        contact = [];
+        contacts = [];
     }else {
-        contact = JSON.parse(localStorage.getItem('contact'));
+        contacts = JSON.parse(localStorage.getItem('contacts'));
     }
 
-    return contact;
+    return contacts;
 
     }
 
@@ -145,7 +145,7 @@ document.querySelector('#list-form').addEventListener('submit', (e) => {
 
     const contact = new Contact(fname,lname, pnumber, email, family );
 
-    console.log(contact);
+    // console.log(contact);
 
     // Add book to UI
 
