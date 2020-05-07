@@ -36,6 +36,7 @@ class UI {
         <td><a href="#" class="btn btn-danger btn-small delete">X</a></td> `;
 
         List.appendChild(row);
+        
 
     }
 
