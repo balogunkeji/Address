@@ -74,9 +74,10 @@ class UI {
 // Stored class : local storage
 
 class Store {
+
    static getContacts() {
     let contacts;
-    if(localStorage.getItem('contact') === null){
+    if(localStorage.getItem('contacts') === null){
         contacts = [];
     }else {
         contacts = JSON.parse(localStorage.getItem('contacts'));
@@ -147,11 +148,11 @@ document.querySelector('#list-form').addEventListener('submit', (e) => {
 
     // console.log(contact);
 
-    // Add book to UI
+    // Add contact to UI
 
     UI.addContactToList(contact);
 
-   // add book to store
+   // add contact to store
 
    Store.addContact(contact);
 
